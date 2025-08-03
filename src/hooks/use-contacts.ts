@@ -15,7 +15,7 @@ export interface CreateContactData {
   clientId: string
 }
 
-export interface UpdateContactData extends Partial<CreateContactData> {}
+export type UpdateContactData = Partial<CreateContactData>
 
 export function useContacts(clientId: string) {
   const [contacts, setContacts] = useState<Contact[]>([])

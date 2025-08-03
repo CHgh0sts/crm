@@ -7,10 +7,10 @@ export interface InvoiceTemplate {
   isDefault: boolean
   isPublic: boolean
   category: 'BUSINESS' | 'CREATIVE' | 'MINIMAL' | 'PROFESSIONAL' | 'MODERN' | 'CLASSIC'
-  layout: any
-  elements: any
-  styles: any
-  variables: any
+  layout: Record<string, unknown>
+  elements: unknown[]
+  styles: Record<string, unknown>
+  variables: Record<string, unknown>
   thumbnail?: string
   version: string
   createdAt: string

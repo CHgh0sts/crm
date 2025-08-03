@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 
 export interface Email {
@@ -180,7 +180,7 @@ export function useEmails() {
         throw new Error(data.error || 'Erreur lors de la récupération des emails')
       }
 
-      setEmails(data.emails.map((email: any) => ({
+      setEmails(data.emails.map((email: Email & { ccEmails?: string; bccEmails?: string; createdAt: string; updatedAt: string; sentAt?: string; scheduledAt?: string }) => ({
         ...email,
         ccEmails: email.ccEmails ? JSON.parse(email.ccEmails) : [],
         bccEmails: email.bccEmails ? JSON.parse(email.bccEmails) : [],

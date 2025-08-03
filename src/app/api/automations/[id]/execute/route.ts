@@ -58,7 +58,7 @@ export async function POST(
         data: {
           status: 'SUCCESS',
           completedAt: new Date(),
-          result: result as any
+          result: result
         }
       })
 

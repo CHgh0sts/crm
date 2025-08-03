@@ -14,7 +14,7 @@ export interface AutomationExecution {
   startedAt: string
   completedAt?: string
   error?: string
-  result?: any
+  result?: unknown
   automation?: {
     id: string
     name: string
@@ -36,8 +36,8 @@ export interface Automation {
   scheduleDayOfWeek?: number
   scheduleInterval?: number
   customCronExpression?: string
-  config: Record<string, any>
-  conditions?: Record<string, any>
+  config: Record<string, unknown>
+  conditions?: Record<string, unknown>
   recipients: AutomationRecipient[]
   executions: AutomationExecution[]
   totalExecutions: number
@@ -62,12 +62,12 @@ export interface CreateAutomationData {
   scheduleDayOfWeek?: number
   scheduleInterval?: number
   customCronExpression?: string
-  config: Record<string, any>
-  conditions?: Record<string, any>
+  config: Record<string, unknown>
+  conditions?: Record<string, unknown>
   recipients?: Omit<AutomationRecipient, 'id'>[]
 }
 
-export interface UpdateAutomationData extends Partial<CreateAutomationData> {}
+export type UpdateAutomationData = Partial<CreateAutomationData>
 
 export interface AutomationsFilters {
   type?: string

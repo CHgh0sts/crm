@@ -13,13 +13,19 @@ interface ImapConfig {
   }
 }
 
+// Interface pour les adresses emails
+interface EmailAddress {
+  address: string
+  name?: string
+}
+
 // Interface pour les données d'email parsé
 interface ParsedEmail {
   messageId: string
   subject: string
-  from: { address: string; name?: string }
-  to: { address: string; name?: string }[]
-  cc?: { address: string; name?: string }[]
+  from: EmailAddress
+  to: EmailAddress[]
+  cc?: EmailAddress[]
   inReplyTo?: string
   references?: string[]
   date: Date
@@ -189,9 +195,9 @@ export class ImapEmailListener {
       const parsed = await simpleParser(messageData.source)
       
       // Convertir en format standardisé
-      const fromAddress = Array.isArray(parsed.from?.value) ? parsed.from.value[0] : parsed.from?.value
-      const toAddresses = Array.isArray(parsed.to?.value) ? parsed.to.value : (parsed.to?.value ? [parsed.to.value] : [])
-      const ccAddresses = Array.isArray(parsed.cc?.value) ? parsed.cc.value : (parsed.cc?.value ? [parsed.cc.value] : [])
+      const fromAddress = Array.isArray(parsed.from) ? parsed.from[0] : parsed.from
+      const toAddresses = Array.isArray(parsed.to) ? parsed.to : (parsed.to ? [parsed.to] : [])
+      const ccAddresses = Array.isArray(parsed.cc) ? parsed.cc : (parsed.cc ? [parsed.cc] : [])
       
       const email: ParsedEmail = {
         messageId: parsed.messageId || '',
@@ -212,7 +218,7 @@ export class ImapEmailListener {
         references: parsed.references ? (Array.isArray(parsed.references) ? parsed.references : [parsed.references]) : undefined,
         date: parsed.date || new Date(),
         text: parsed.text,
-        html: parsed.html,
+        html: parsed.html || undefined,
         headers: new Map() // Simplifier pour éviter les erreurs de type
       }
 
@@ -295,9 +301,9 @@ export class ImapEmailListener {
   }
 
   // Créer une notification de réponse
-  private async createReplyNotification(originalEmail: any, replyEmail: ParsedEmail): Promise<void> {
+  private async createReplyNotification(originalEmail: { id: string; subject: string; userId: string }, replyEmail: ParsedEmail): Promise<void> {
     try {
-      const clientName = originalEmail.client?.name || replyEmail.from.name || replyEmail.from.address
+      const clientName = replyEmail.from.name || replyEmail.from.address
       const subject = originalEmail.subject.length > 50 
         ? originalEmail.subject.substring(0, 50) + '...' 
         : originalEmail.subject
@@ -310,10 +316,7 @@ export class ImapEmailListener {
           message: `${clientName} a répondu à l'email "${subject}"`,
           data: {
             emailId: originalEmail.id,
-            messageId: originalEmail.messageId,
             replyMessageId: replyEmail.messageId,
-            clientId: originalEmail.clientId,
-            projectId: originalEmail.projectId,
             repliedAt: replyEmail.date,
             type: 'email_reply'
           }

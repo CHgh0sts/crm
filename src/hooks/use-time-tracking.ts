@@ -50,7 +50,7 @@ export interface CreateTimeLogData {
   hourlyRate?: number
 }
 
-export interface UpdateTimeLogData extends Partial<CreateTimeLogData> {}
+export type UpdateTimeLogData = Partial<CreateTimeLogData>
 
 export interface TimeTrackingStats {
   totalDuration: number // en minutes
@@ -404,7 +404,7 @@ export function useTimeStats(startDate?: string, endDate?: string) {
       const { timeLogs } = await response.json()
       
       // Calculer les statistiques par jour
-      const dailyStats = timeLogs.reduce((acc: any, log: TimeLog) => {
+      const dailyStats = timeLogs.reduce((acc: Record<string, { date: string; duration: number; revenue: number }>, log: TimeLog) => {
         const date = new Date(log.startTime).toISOString().split('T')[0]
         if (!acc[date]) {
           acc[date] = { date, duration: 0, revenue: 0 }
@@ -418,8 +418,8 @@ export function useTimeStats(startDate?: string, endDate?: string) {
       }, {})
 
       const dailyStatsArray = Object.values(dailyStats) as Array<{ date: string; duration: number; revenue: number }>
-      const totalDuration = dailyStatsArray.reduce((sum, day: any) => sum + day.duration, 0)
-      const totalRevenue = dailyStatsArray.reduce((sum, day: any) => sum + day.revenue, 0)
+      const totalDuration = dailyStatsArray.reduce((sum, day) => sum + day.duration, 0)
+      const totalRevenue = dailyStatsArray.reduce((sum, day) => sum + day.revenue, 0)
 
       setStats({
         dailyStats: dailyStatsArray.sort((a, b) => a.date.localeCompare(b.date)),

@@ -1,12 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { TemplateBuilder } from '@/components/invoices/template-builder'
 import { useInvoiceTemplates } from '@/hooks/use-invoice-templates'
 import { PageLoading } from '@/components/ui/loading'
 
-export default function TemplateBuilderPage() {
+// Composant pour gérer les paramètres de recherche
+function TemplateBuilderContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const templateId = searchParams.get('id')
@@ -110,5 +111,14 @@ export default function TemplateBuilderPage() {
       onSave={handleSave}
       onCancel={handleCancel}
     />
+  )
+}
+
+// Composant principal avec Suspense boundary
+export default function TemplateBuilderPage() {
+  return (
+    <Suspense fallback={<PageLoading />}>
+      <TemplateBuilderContent />
+    </Suspense>
   )
 } 

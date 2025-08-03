@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useInvoiceTemplates, InvoiceTemplate } from '@/hooks/use-invoice-templates'
 import { MainLayout } from '@/components/layout/main-layout'
@@ -23,7 +23,8 @@ import {
   Share,
 } from 'lucide-react'
 
-export default function TemplatePreviewPage() {
+// Composant pour gérer les paramètres de recherche
+function TemplatePreviewContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const templateId = searchParams.get('id')
@@ -496,15 +497,15 @@ export default function TemplatePreviewPage() {
                       ref={previewRef}
                       className="min-h-[800px] p-8 bg-white"
                       style={{
-                        width: template.layout?.width || '210mm',
-                        minHeight: template.layout?.height || '297mm',
+                        width: (template.layout?.width as string) || '210mm',
+                        minHeight: (template.layout?.height as string) || '297mm',
                         margin: '0 auto',
-                        padding: `${template.layout?.margin?.top || '20mm'} ${template.layout?.margin?.right || '20mm'} ${template.layout?.margin?.bottom || '20mm'} ${template.layout?.margin?.left || '20mm'}`
+                        padding: `${(template.layout?.margin as any)?.top || '20mm'} ${(template.layout?.margin as any)?.right || '20mm'} ${(template.layout?.margin as any)?.bottom || '20mm'} ${(template.layout?.margin as any)?.left || '20mm'}`
                       }}
                     >
                       {template.elements && template.elements.length > 0 ? (
                         <TemplateRenderer
-                          elements={template.elements}
+                          elements={template.elements as any}
                           variables={mockVariables}
                         />
                       ) : (
@@ -529,5 +530,14 @@ export default function TemplatePreviewPage() {
         </div>
       </div>
     </MainLayout>
+  )
+}
+
+// Composant principal avec Suspense boundary
+export default function TemplatePreviewPage() {
+  return (
+    <Suspense fallback={<PageLoading />}>
+      <TemplatePreviewContent />
+    </Suspense>
   )
 } 

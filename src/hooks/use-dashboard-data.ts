@@ -84,15 +84,15 @@ export function useDashboardData() {
       // Convertir les dates en objets Date
       const processedData: DashboardData = {
         ...dashboardData,
-        recentActivities: dashboardData.recentActivities.map((activity: any) => ({
+        recentActivities: dashboardData.recentActivities.map((activity: { date: string; type: string; description: string; client?: string; project?: string }) => ({
           ...activity,
           date: new Date(activity.date)
         })),
-        upcomingTasks: dashboardData.upcomingTasks.map((task: any) => ({
+        upcomingTasks: dashboardData.upcomingTasks.map((task: { id: string; title: string; dueDate: string; priority: string; project?: string }) => ({
           ...task,
           dueDate: new Date(task.dueDate)
         })),
-        runningTimers: dashboardData.runningTimers.map((timer: any) => ({
+        runningTimers: dashboardData.runningTimers.map((timer: { id: string; description: string; project?: string; startTime: string }) => ({
           ...timer,
           startTime: new Date(timer.startTime)
         }))

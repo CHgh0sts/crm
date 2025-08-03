@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 import { prisma } from '@/lib/db'
-import { User } from '@/generated/prisma'
+
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-fallback-secret-key'
 const COOKIE_NAME = 'auth-token'
@@ -44,9 +44,9 @@ export function generateToken(user: AuthUser): string {
 // Verify JWT token
 export function verifyToken(token: string): AuthUser | null {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as any
+    const decoded = jwt.verify(token, JWT_SECRET) as AuthUser
     return decoded
-  } catch (error) {
+  } catch {
     return null
   }
 }
@@ -109,7 +109,7 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
       role: user.role,
       theme: user.theme,
     }
-  } catch (error) {
+  } catch {
     return null
   }
 }

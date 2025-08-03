@@ -150,7 +150,7 @@ export async function sendEmail(emailData: EmailData): Promise<{ success: boolea
     }
 
     // Envoyer l'email
-    const info = await transporter.sendMail(mailOptions)
+    await transporter.sendMail(mailOptions)
     
     // Mettre à jour le statut en base de données
     await prisma.email.update({
@@ -162,7 +162,7 @@ export async function sendEmail(emailData: EmailData): Promise<{ success: boolea
       }
     })
 
-    console.log('Email envoyé:', info.messageId)
+    console.log('Email envoyé avec succès')
     return { success: true, emailId: email.id }
 
   } catch (error) {
@@ -245,7 +245,7 @@ export async function sendReplyEmail(
     }
 
     // Envoyer l'email
-    const info = await transporter.sendMail(mailOptions)
+    await transporter.sendMail(mailOptions)
     
     // Mettre à jour le statut
     await prisma.email.update({

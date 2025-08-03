@@ -102,7 +102,7 @@ export interface CreateClientData {
   status?: 'ACTIVE' | 'INACTIVE' | 'PROSPECT'
 }
 
-export interface UpdateClientData extends Partial<CreateClientData> {}
+export type UpdateClientData = Partial<CreateClientData>
 
 export function useClients() {
   const [clients, setClients] = useState<Client[]>([])

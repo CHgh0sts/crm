@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { MainLayout } from '@/components/layout/main-layout'
 import { Button } from '@/components/ui/button'
@@ -39,7 +39,8 @@ interface InvoiceItem {
   taxRate: number
 }
 
-export default function CreateInvoicePage() {
+// Composant pour gérer les paramètres de recherche
+function CreateInvoiceContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const clientId = searchParams.get('clientId')
@@ -319,13 +320,13 @@ export default function CreateInvoicePage() {
                     ref={previewRef}
                     className="bg-white p-8 mx-auto"
                     style={{
-                      width: selectedTemplate.layout?.width || '210mm',
-                      minHeight: selectedTemplate.layout?.height || '297mm',
+                      width: (selectedTemplate.layout?.width as string) || '210mm',
+                      minHeight: (selectedTemplate.layout?.height as string) || '297mm',
                       margin: '0 auto'
                     }}
                   >
                     <TemplateRenderer
-                      elements={selectedTemplate.elements || []}
+                      elements={(selectedTemplate.elements as any) || []}
                       variables={getPreviewVariables()}
                     />
                   </div>
@@ -702,5 +703,20 @@ export default function CreateInvoicePage() {
         </form>
       </div>
     </MainLayout>
+  )
+}
+
+// Composant principal avec Suspense boundary
+export default function CreateInvoicePage() {
+  return (
+    <Suspense fallback={
+      <MainLayout>
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        </div>
+      </MainLayout>
+    }>
+      <CreateInvoiceContent />
+    </Suspense>
   )
 } 
