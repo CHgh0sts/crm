@@ -14,10 +14,12 @@ export async function POST(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Récupérer l'email avec toutes ses informations
     const email = await prisma.email.findUnique({
       where: { 
-        id: params.id,
+        id: id,
         userId: user.id,
       }
     })
@@ -86,7 +88,7 @@ export async function POST(
         to: email.toName ? `"${email.toName}" <${email.toEmail}>` : email.toEmail,
         cc: emailData.cc,
         bcc: emailData.bcc,
-        replyTo: email.replyToEmail,
+        replyTo: email.replyToEmail || undefined,
         subject: email.subject,
         text: email.textContent,
         html: htmlWithTracking,

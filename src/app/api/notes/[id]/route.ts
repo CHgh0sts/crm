@@ -27,9 +27,11 @@ export async function GET(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     const note = await prisma.note.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
       include: {
@@ -101,10 +103,12 @@ export async function PUT(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que la note appartient à l'utilisateur
     const existingNote = await prisma.note.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
     })
@@ -266,10 +270,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que la note appartient à l'utilisateur
     const existingNote = await prisma.note.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
     })
@@ -283,7 +289,7 @@ export async function DELETE(
 
     // Supprimer la note
     await prisma.note.delete({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     return NextResponse.json({ 

@@ -31,9 +31,11 @@ export async function GET(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     const timeLog = await prisma.timeLog.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
       include: {
@@ -98,10 +100,12 @@ export async function PUT(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que le log de temps appartient à l'utilisateur
     const existingTimeLog = await prisma.timeLog.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
     })

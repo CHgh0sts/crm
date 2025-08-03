@@ -122,13 +122,15 @@ export async function PUT(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     const body = await request.json()
     const validatedData = updateEmailSchema.parse(body)
 
     // Vérifier que l'email existe et appartient à l'utilisateur
     const existingEmail = await prisma.email.findUnique({
       where: { 
-        id: params.id,
+        id: id,
         userId: user.id,
       }
     })
@@ -150,7 +152,7 @@ export async function PUT(
 
     // Mettre à jour l'email
     const updatedEmail = await prisma.email.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         ...validatedData,
         ccEmails: validatedData.cc ? JSON.stringify(validatedData.cc) : undefined,
@@ -211,10 +213,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que l'email existe et appartient à l'utilisateur
     const existingEmail = await prisma.email.findUnique({
       where: { 
-        id: params.id,
+        id: id,
         userId: user.id,
       }
     })
@@ -236,7 +240,7 @@ export async function DELETE(
 
     // Supprimer l'email
     await prisma.email.delete({
-      where: { id: params.id }
+      where: { id: id }
     })
 
     return NextResponse.json({
