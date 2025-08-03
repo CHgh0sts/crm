@@ -180,7 +180,7 @@ export class ImapEmailListener {
       // Télécharger le message complet
       const messageData = await this.client.fetchOne(uid, { source: true })
       
-      if (!messageData || messageData === false || !('source' in messageData) || !messageData.source) {
+      if (!messageData || !('source' in messageData) || !messageData.source) {
         console.warn(`Pas de source pour le message ${uid}`)
         return
       }
