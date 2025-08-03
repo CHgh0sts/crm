@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
+import { NextRequest } from 'next/server'
 import { prisma } from '@/lib/db'
 
 
@@ -109,6 +110,50 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
       role: user.role,
       theme: user.theme,
     }
+  } catch {
+    return null
+  }
+}
+
+// Get current user from Bearer token or cookie
+export async function getCurrentUserFromRequest(request: NextRequest): Promise<AuthUser | null> {
+  try {
+    // D'abord, essayer le Bearer token
+    const authHeader = request.headers.get('Authorization')
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.substring(7)
+      const decoded = verifyToken(token)
+      if (decoded) {
+        // Vérifier que l'utilisateur existe encore en base
+        const user = await prisma.user.findUnique({
+          where: { id: decoded.id, isActive: true },
+          select: {
+            id: true,
+            email: true,
+            firstName: true,
+            lastName: true,
+            avatar: true,
+            role: true,
+            theme: true,
+          },
+        })
+
+        if (user) {
+          return {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            avatar: user.avatar,
+            role: user.role,
+            theme: user.theme,
+          }
+        }
+      }
+    }
+
+    // Si pas de Bearer token, utiliser la méthode cookie classique
+    return await getCurrentUser()
   } catch {
     return null
   }

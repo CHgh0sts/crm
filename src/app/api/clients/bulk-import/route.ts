@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/db'
+import { getCurrentUserFromRequest } from '@/lib/auth'
 
 // Schéma de validation pour un restaurant (adapté aux nouveaux noms de champs)
 const restaurantSchema = z.object({
@@ -50,29 +51,19 @@ interface ImportResult {
   }>
 }
 
-// POST /api/clients/bulk-import - Importer des restaurants en lot comme prospects (sans authentification)
+// POST /api/clients/bulk-import - Importer des restaurants en lot comme prospects (avec authentification)
 export async function POST(request: NextRequest) {
   try {
-    // Note: Cette route fonctionne sans authentification pour l'import en lot
-    console.log('🔄 Début de l\'import en lot sans authentification')
-
-    // Créer ou récupérer un utilisateur système pour les imports
-    let systemUser = await prisma.user.findFirst({
-      where: { email: 'system@import.local' }
-    })
-
-    if (!systemUser) {
-      systemUser = await prisma.user.create({
-        data: {
-          email: 'system@import.local',
-          password: 'system_import_user', // Mot de passe non utilisé
-          firstName: 'Système',
-          lastName: 'Import',
-          role: 'USER'
-        }
-      })
-      console.log('✅ Utilisateur système créé pour les imports')
+    // Authentification requise
+    const user = await getCurrentUserFromRequest(request)
+    if (!user) {
+      return NextResponse.json(
+        { error: 'Non authentifié. Token Bearer requis.' },
+        { status: 401 }
+      )
     }
+
+    console.log(`🔄 Début de l'import en lot pour l'utilisateur ${user.email}`)
 
     const body = await request.json()
     const validatedData = bulkImportSchema.parse(body)
@@ -106,13 +97,14 @@ export async function POST(request: NextRequest) {
 
     for (const restaurant of restaurants) {
       try {
-        // Vérifier si un client existe déjà avec le même email ou nom+adresse
+        // Vérifier si un client existe déjà avec le même email ou nom+adresse pour cet utilisateur
         let existingClient = null
         
         if (restaurant.email) {
           existingClient = await prisma.client.findFirst({
             where: {
-              email: restaurant.email
+              email: restaurant.email,
+              userId: user.id
             }
           })
         }
@@ -122,7 +114,8 @@ export async function POST(request: NextRequest) {
           existingClient = await prisma.client.findFirst({
             where: {
               name: restaurant.title,
-              address: restaurant.address
+              address: restaurant.address,
+              userId: user.id
             }
           })
         }
@@ -155,7 +148,7 @@ export async function POST(request: NextRequest) {
             restaurant.specialties?.length ? `Spécialités: ${restaurant.specialties.join(', ')}` : '',
             restaurant.services?.length ? `Services: ${restaurant.services.join(', ')}` : '',
           ].filter(Boolean).join('\n'),
-          userId: systemUser.id,
+          userId: user.id,
         }
 
         // Créer le client
