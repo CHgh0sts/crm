@@ -19,11 +19,16 @@ const restaurantSchema = z.object({
   photos: z.array(z.string()).optional(),
 })
 
-// Schéma pour la requête complète
-const bulkImportSchema = z.object({
-  restaurants: z.array(restaurantSchema),
-  createAsProspects: z.boolean().default(true),
-})
+// Schéma pour la requête complète (supporte les deux formats)
+const bulkImportSchema = z.union([
+  // Format 1: Objet avec propriété restaurants
+  z.object({
+    restaurants: z.array(restaurantSchema),
+    createAsProspects: z.boolean().default(true),
+  }),
+  // Format 2: Tableau direct de restaurants
+  z.array(restaurantSchema),
+])
 
 // Interface pour le résultat de l'import
 interface ImportResult {
@@ -65,7 +70,21 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const validatedData = bulkImportSchema.parse(body)
 
-    console.log(`🚀 Début d'import en lot de ${validatedData.restaurants.length} restaurants`)
+    // Normaliser les données selon le format reçu
+    let restaurants: any[]
+    let createAsProspects: boolean
+
+    if (Array.isArray(validatedData)) {
+      // Format 2: Tableau direct de restaurants
+      restaurants = validatedData
+      createAsProspects = true // Valeur par défaut
+    } else {
+      // Format 1: Objet avec propriété restaurants
+      restaurants = validatedData.restaurants
+      createAsProspects = validatedData.createAsProspects
+    }
+
+    console.log(`🚀 Début d'import en lot de ${restaurants.length} restaurants`)
 
     const result: ImportResult = {
       created: 0,
@@ -74,7 +93,7 @@ export async function POST(request: NextRequest) {
       details: []
     }
 
-    for (const restaurant of validatedData.restaurants) {
+    for (const restaurant of restaurants) {
       try {
         // Vérifier si un client existe déjà avec le même email ou nom+adresse
         let existingClient = null
@@ -115,7 +134,7 @@ export async function POST(request: NextRequest) {
           phone: restaurant.telephone || null,
           address: restaurant.adresse || null,
           website: restaurant.site_web || null,
-          status: validatedData.createAsProspects ? 'PROSPECT' as const : 'ACTIVE' as const,
+          status: createAsProspects ? 'PROSPECT' as const : 'ACTIVE' as const,
           notes: [
             restaurant.type_cuisine ? `Type de cuisine: ${restaurant.type_cuisine}` : '',
             restaurant.note_moyenne ? `Note moyenne: ${restaurant.note_moyenne}` : '',

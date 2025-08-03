@@ -1,0 +1,19 @@
+[
+  {
+    "nom": "Restaurant Test Direct",
+    "adresse": "123 Test Street, 75001 Paris",
+    "telephone": "+33 1 23 45 67 89",
+    "email": "test@restaurant.fr",
+    "site_web": "https://www.testrestaurant.fr",
+    "type_cuisine": "Française",
+    "note_moyenne": 4.0,
+    "nombre_avis": 50,
+    "gamme_prix": "€€",
+    "horaires": {
+      "lundi": "12:00-22:00",
+      "mardi": "12:00-22:00"
+    },
+    "services": ["Test Service"],
+    "specialites": ["Test Spécialité"]
+  }
+]

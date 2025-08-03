@@ -10,7 +10,9 @@ Cette fonctionnalité vous permet d'importer des restaurants en lot comme prospe
 
 ## Format des données
 
-Les données doivent être envoyées en JSON avec la structure suivante :
+L'API accepte **deux formats** de données :
+
+### Format 1: Objet avec propriété restaurants (recommandé)
 
 ```json
 {
@@ -37,6 +39,33 @@ Les données doivent être envoyées en JSON avec la structure suivante :
   "createAsProspects": true
 }
 ```
+
+### Format 2: Tableau direct de restaurants (simplifié)
+
+```json
+[
+  {
+    "nom": "Nom du restaurant (requis)",
+    "adresse": "Adresse complète (optionnel)",
+    "telephone": "Numéro de téléphone (optionnel)",
+    "email": "email@restaurant.fr (optionnel)",
+    "site_web": "https://www.restaurant.fr (optionnel)",
+    "type_cuisine": "Type de cuisine (optionnel)",
+    "note_moyenne": 4.5,
+    "nombre_avis": 123,
+    "gamme_prix": "€€€ (optionnel)",
+    "horaires": {
+      "lundi": "12:00-14:00, 19:00-22:00",
+      "mardi": "12:00-14:00, 19:00-22:00"
+    },
+    "services": ["Service 1", "Service 2"],
+    "specialites": ["Spécialité 1", "Spécialité 2"],
+    "photos": ["https://example.com/photo1.jpg"]
+  }
+]
+```
+
+**Note**: Le Format 2 créera automatiquement tous les clients comme prospects.
 
 ## Fonctionnalités
 
@@ -65,10 +94,20 @@ node scripts/test-bulk-import.js
 
 ### 2. Via cURL
 
+**Format 1 (avec objet):**
+
 ```bash
 curl -X POST http://localhost:3000/api/clients/bulk-import \
   -H "Content-Type: application/json" \
   -d @example-restaurants-import.json
+```
+
+**Format 2 (tableau direct):**
+
+```bash
+curl -X POST http://localhost:3000/api/clients/bulk-import \
+  -H "Content-Type: application/json" \
+  -d @test-direct-array.json
 ```
 
 ### 3. Via votre application frontend
