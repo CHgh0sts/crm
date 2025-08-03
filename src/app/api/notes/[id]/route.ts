@@ -195,7 +195,7 @@ export async function PUT(
     }
 
     const updatedNote = await prisma.note.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         ...updateData,
         updatedAt: new Date(),
