@@ -68,7 +68,6 @@ node scripts/test-bulk-import.js
 ```bash
 curl -X POST http://localhost:3000/api/clients/bulk-import \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
   -d @example-restaurants-import.json
 ```
 
@@ -78,8 +77,7 @@ curl -X POST http://localhost:3000/api/clients/bulk-import \
 const response = await fetch('/api/clients/bulk-import', {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${yourToken}`
+    'Content-Type': 'application/json'
   },
   body: JSON.stringify({
     restaurants: restaurantsData,
@@ -119,7 +117,7 @@ console.log('Import results:', result);
 
 ## Authentification
 
-Vous devez être authentifié pour utiliser cette API. Assurez-vous d'inclure votre token d'authentification dans l'en-tête `Authorization`.
+Cette API fonctionne **sans authentification**. Elle crée automatiquement un utilisateur système pour gérer les imports en lot. Tous les clients importés seront associés à cet utilisateur système.
 
 ## Validation des données
 

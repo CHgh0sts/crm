@@ -80,9 +80,7 @@ async function testBulkImport() {
     const response = await fetch('http://localhost:3000/api/clients/bulk-import', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        // Ajoutez ici votre token d'authentification si nécessaire
-        // 'Authorization': 'Bearer YOUR_TOKEN_HERE'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         restaurants: restaurantsData,

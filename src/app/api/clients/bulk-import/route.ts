@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/db'
-import { getCurrentUser } from '@/lib/auth'
 
 // Schéma de validation pour un restaurant
 const restaurantSchema = z.object({
@@ -39,12 +38,28 @@ interface ImportResult {
   }>
 }
 
-// POST /api/clients/bulk-import - Importer des restaurants en lot comme prospects
+// POST /api/clients/bulk-import - Importer des restaurants en lot comme prospects (sans authentification)
 export async function POST(request: NextRequest) {
   try {
-    const user = await getCurrentUser()
-    if (!user) {
-      return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
+    // Note: Cette route fonctionne sans authentification pour l'import en lot
+    console.log('🔄 Début de l\'import en lot sans authentification')
+
+    // Créer ou récupérer un utilisateur système pour les imports
+    let systemUser = await prisma.user.findFirst({
+      where: { email: 'system@import.local' }
+    })
+
+    if (!systemUser) {
+      systemUser = await prisma.user.create({
+        data: {
+          email: 'system@import.local',
+          password: 'system_import_user', // Mot de passe non utilisé
+          firstName: 'Système',
+          lastName: 'Import',
+          role: 'USER'
+        }
+      })
+      console.log('✅ Utilisateur système créé pour les imports')
     }
 
     const body = await request.json()
@@ -67,7 +82,6 @@ export async function POST(request: NextRequest) {
         if (restaurant.email) {
           existingClient = await prisma.client.findFirst({
             where: {
-              userId: user.id,
               email: restaurant.email
             }
           })
@@ -77,7 +91,6 @@ export async function POST(request: NextRequest) {
         if (!existingClient && restaurant.adresse) {
           existingClient = await prisma.client.findFirst({
             where: {
-              userId: user.id,
               name: restaurant.nom,
               address: restaurant.adresse
             }
@@ -111,7 +124,7 @@ export async function POST(request: NextRequest) {
             restaurant.specialites?.length ? `Spécialités: ${restaurant.specialites.join(', ')}` : '',
             restaurant.services?.length ? `Services: ${restaurant.services.join(', ')}` : '',
           ].filter(Boolean).join('\n'),
-          userId: user.id,
+          userId: systemUser.id,
         }
 
         // Créer le client
