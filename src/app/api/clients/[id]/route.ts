@@ -20,7 +20,7 @@ const updateClientSchema = z.object({
 // GET /api/clients/[id] - Récupérer un client spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -179,7 +179,7 @@ export async function GET(
 // PUT /api/clients/[id] - Mettre à jour un client
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -267,7 +267,7 @@ export async function PUT(
 // DELETE /api/clients/[id] - Supprimer un client
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()

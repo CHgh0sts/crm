@@ -19,7 +19,7 @@ const updateNoteSchema = z.object({
 // GET /api/notes/[id] - Récupérer une note spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -93,7 +93,7 @@ export async function GET(
 // PUT /api/notes/[id] - Mettre à jour une note
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -258,7 +258,7 @@ export async function PUT(
 // DELETE /api/notes/[id] - Supprimer une note
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()

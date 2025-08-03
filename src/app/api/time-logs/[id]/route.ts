@@ -23,7 +23,7 @@ function calculateDuration(startTime: Date, endTime: Date): number {
 // GET /api/time-logs/[id] - Récupérer un log de temps spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -90,7 +90,7 @@ export async function GET(
 // PUT /api/time-logs/[id] - Mettre à jour un log de temps
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -260,7 +260,7 @@ export async function PUT(
 // DELETE /api/time-logs/[id] - Supprimer un log de temps
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()

@@ -20,7 +20,7 @@ const updateEmailSchema = z.object({
 // GET /api/emails/[id] - Récupérer un email spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -28,9 +28,11 @@ export async function GET(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     const email = await prisma.email.findUnique({
       where: { 
-        id: params.id,
+        id: id,
         userId: user.id, // S'assurer que l'email appartient à l'utilisateur
       },
       include: {
@@ -112,7 +114,7 @@ export async function GET(
 // PUT /api/emails/[id] - Mettre à jour un email
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -201,7 +203,7 @@ export async function PUT(
 // DELETE /api/emails/[id] - Supprimer un email
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()

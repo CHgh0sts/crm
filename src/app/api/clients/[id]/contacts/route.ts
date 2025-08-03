@@ -16,7 +16,7 @@ const createContactSchema = z.object({
 // GET /api/clients/[id]/contacts - Récupérer tous les contacts d'un client
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -61,7 +61,7 @@ export async function GET(
 // POST /api/clients/[id]/contacts - Créer un nouveau contact
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()

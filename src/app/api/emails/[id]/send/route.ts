@@ -6,7 +6,7 @@ import { sendEmail, EmailData } from '@/lib/email'
 // POST /api/emails/[id]/send - Envoyer un email existant
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()

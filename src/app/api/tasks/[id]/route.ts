@@ -19,7 +19,7 @@ const updateTaskSchema = z.object({
 // GET /api/tasks/[id] - Récupérer une tâche spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -124,7 +124,7 @@ export async function GET(
 // PUT /api/tasks/[id] - Mettre à jour une tâche
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -277,7 +277,7 @@ export async function PUT(
 // DELETE /api/tasks/[id] - Supprimer une tâche
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()

@@ -14,7 +14,7 @@ const interactionSchema = z.object({
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -22,10 +22,12 @@ export async function GET(
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que le client appartient à l'utilisateur
     const client = await prisma.client.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id
       }
     })
@@ -36,7 +38,7 @@ export async function GET(
 
     const interactions = await prisma.interaction.findMany({
       where: {
-        clientId: params.id
+        clientId: id
       },
       orderBy: {
         date: 'desc'
@@ -55,7 +57,7 @@ export async function GET(
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -63,10 +65,12 @@ export async function POST(
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que le client appartient à l'utilisateur
     const client = await prisma.client.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id
       }
     })
@@ -82,7 +86,7 @@ export async function POST(
       data: {
         ...validatedData,
         date: new Date(validatedData.date),
-        clientId: params.id,
+        clientId: id,
       }
     })
 

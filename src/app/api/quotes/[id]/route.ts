@@ -27,7 +27,7 @@ const updateQuoteSchema = z.object({
 // GET - Récupérer un devis spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -118,7 +118,7 @@ export async function GET(
 // PUT - Mettre à jour un devis
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // TODO: Récupérer userId depuis l'authentification
@@ -273,7 +273,7 @@ export async function PUT(
 // DELETE - Supprimer un devis
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // TODO: Récupérer userId depuis l'authentification

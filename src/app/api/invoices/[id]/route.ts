@@ -47,7 +47,7 @@ function calculateInvoiceTotals(
 // GET /api/invoices/[id] - Récupérer une facture spécifique
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -109,7 +109,7 @@ export async function GET(
 // PUT /api/invoices/[id] - Mettre à jour une facture
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
@@ -269,7 +269,7 @@ export async function PUT(
 // DELETE /api/invoices/[id] - Supprimer une facture
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getCurrentUser()
