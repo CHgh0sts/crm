@@ -2,24 +2,27 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/db'
 
-// Schéma de validation pour un restaurant
+// Schéma de validation pour un restaurant (adapté aux nouveaux noms de champs)
 const restaurantSchema = z.object({
-  nom: z.string().min(1, 'Le nom est requis'),
-  adresse: z.string().optional(),
-  telephone: z.string().optional(),
+  title: z.string().min(1, 'Le titre est requis'),
+  address: z.string().optional(),
+  phone: z.string().optional(),
   email: z.string().email('Email invalide').optional().or(z.literal('')),
-  site_web: z.string().url('URL invalide').optional().or(z.literal('')),
-  type_cuisine: z.string().optional(),
-  note_moyenne: z.number().optional(),
-  nombre_avis: z.number().optional(),
-  gamme_prix: z.string().optional(),
-  horaires: z.record(z.string(), z.string()).optional(),
+  website: z.string().url('URL invalide').optional().or(z.literal('')),
+  cuisineType: z.string().optional(),
+  rating: z.number().optional(),
+  reviewCount: z.number().optional(),
+  priceRange: z.string().optional(),
+  openingHours: z.array(z.object({
+    day: z.string(),
+    hours: z.string()
+  })).optional(),
   services: z.array(z.string()).optional(),
-  specialites: z.array(z.string()).optional(),
+  specialties: z.array(z.string()).optional(),
   photos: z.array(z.string()).optional(),
-})
+}).passthrough() // Permet les champs supplémentaires sans erreur
 
-// Schéma pour la requête complète (supporte les deux formats)
+// Schéma pour la requête complète (supporte trois formats)
 const bulkImportSchema = z.union([
   // Format 1: Objet avec propriété restaurants
   z.object({
@@ -28,6 +31,10 @@ const bulkImportSchema = z.union([
   }),
   // Format 2: Tableau direct de restaurants
   z.array(restaurantSchema),
+  // Format 3: Objet avec propriété body (nouveau format)
+  z.object({
+    body: z.array(restaurantSchema),
+  }),
 ])
 
 // Interface pour le résultat de l'import
@@ -78,6 +85,10 @@ export async function POST(request: NextRequest) {
       // Format 2: Tableau direct de restaurants
       restaurants = validatedData
       createAsProspects = true // Valeur par défaut
+    } else if ('body' in validatedData) {
+      // Format 3: Objet avec propriété body
+      restaurants = validatedData.body
+      createAsProspects = true // Valeur par défaut
     } else {
       // Format 1: Objet avec propriété restaurants
       restaurants = validatedData.restaurants
@@ -107,11 +118,11 @@ export async function POST(request: NextRequest) {
         }
 
         // Si pas trouvé par email, chercher par nom et adresse
-        if (!existingClient && restaurant.adresse) {
+        if (!existingClient && restaurant.address) {
           existingClient = await prisma.client.findFirst({
             where: {
-              name: restaurant.nom,
-              address: restaurant.adresse
+              name: restaurant.title,
+              address: restaurant.address
             }
           })
         }
@@ -119,7 +130,7 @@ export async function POST(request: NextRequest) {
         if (existingClient) {
           result.skipped++
           result.details.push({
-            name: restaurant.nom,
+            name: restaurant.title,
             status: 'skipped',
             reason: `Client existant${restaurant.email ? ' (même email)' : ' (même nom et adresse)'}`
           })
@@ -128,19 +139,20 @@ export async function POST(request: NextRequest) {
 
         // Préparer les données pour la création du client
         const clientData = {
-          name: restaurant.nom,
-          company: restaurant.nom, // Utiliser le nom comme nom d'entreprise
+          name: restaurant.title,
+          company: restaurant.title, // Utiliser le titre comme nom d'entreprise
           email: restaurant.email || null,
-          phone: restaurant.telephone || null,
-          address: restaurant.adresse || null,
-          website: restaurant.site_web || null,
+          phone: restaurant.phone || null,
+          address: restaurant.address || null,
+          website: restaurant.website || null,
           status: createAsProspects ? 'PROSPECT' as const : 'ACTIVE' as const,
           notes: [
-            restaurant.type_cuisine ? `Type de cuisine: ${restaurant.type_cuisine}` : '',
-            restaurant.note_moyenne ? `Note moyenne: ${restaurant.note_moyenne}` : '',
-            restaurant.nombre_avis ? `Nombre d'avis: ${restaurant.nombre_avis}` : '',
-            restaurant.gamme_prix ? `Gamme de prix: ${restaurant.gamme_prix}` : '',
-            restaurant.specialites?.length ? `Spécialités: ${restaurant.specialites.join(', ')}` : '',
+            restaurant.cuisineType ? `Type de cuisine: ${restaurant.cuisineType}` : '',
+            restaurant.rating ? `Note moyenne: ${restaurant.rating}` : '',
+            restaurant.reviewCount ? `Nombre d'avis: ${restaurant.reviewCount}` : '',
+            restaurant.priceRange ? `Gamme de prix: ${restaurant.priceRange}` : '',
+            restaurant.openingHours?.length ? `Horaires: ${restaurant.openingHours.map((h: { day: string; hours: string }) => `${h.day}: ${h.hours}`).join(', ')}` : '',
+            restaurant.specialties?.length ? `Spécialités: ${restaurant.specialties.join(', ')}` : '',
             restaurant.services?.length ? `Services: ${restaurant.services.join(', ')}` : '',
           ].filter(Boolean).join('\n'),
           userId: systemUser.id,
@@ -164,18 +176,18 @@ export async function POST(request: NextRequest) {
 
         result.created++
         result.details.push({
-          name: restaurant.nom,
+          name: restaurant.title,
           status: 'created',
           clientId: newClient.id
         })
 
-        console.log(`✅ Client créé: ${restaurant.nom} (ID: ${newClient.id})`)
+        console.log(`✅ Client créé: ${restaurant.title} (ID: ${newClient.id})`)
 
       } catch (error) {
-        console.error(`❌ Erreur lors de la création du client ${restaurant.nom}:`, error)
+        console.error(`❌ Erreur lors de la création du client ${restaurant.title}:`, error)
         result.errors++
         result.details.push({
-          name: restaurant.nom,
+          name: restaurant.title,
           status: 'error',
           reason: error instanceof Error ? error.message : 'Erreur inconnue'
         })
