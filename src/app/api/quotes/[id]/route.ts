@@ -222,7 +222,7 @@ export async function PUT(
 
     // Mettre à jour le devis
     const quote = await prisma.quote.update({
-      where: { id: params.id },
+      where: { id: id },
       data: updateData,
       include: {
         client: {
