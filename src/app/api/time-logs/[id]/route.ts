@@ -204,7 +204,7 @@ export async function PUT(
     }
 
     const updatedTimeLog = await prisma.timeLog.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         ...updateData,
         updatedAt: new Date(),
@@ -272,10 +272,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que le log de temps appartient à l'utilisateur
     const existingTimeLog = await prisma.timeLog.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
     })
@@ -289,7 +291,7 @@ export async function DELETE(
 
     // Supprimer le log de temps
     await prisma.timeLog.delete({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     return NextResponse.json({ 
