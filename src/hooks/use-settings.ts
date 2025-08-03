@@ -21,6 +21,7 @@ export interface UserSettings {
   timezone: string
   language: string
   theme: string
+  defaultInvoiceTemplate?: string
 
   // Entreprise (optionnel - peut être séparé)
   businessInfo?: {
@@ -60,6 +61,7 @@ export interface UpdateSettingsData {
   timezone?: string
   language?: string
   theme?: string
+  defaultInvoiceTemplate?: string
 }
 
 export interface ChangePasswordData {
