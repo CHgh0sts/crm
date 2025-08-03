@@ -90,7 +90,7 @@ export async function POST(
         bcc: emailData.bcc,
         replyTo: email.replyToEmail || undefined,
         subject: email.subject,
-        text: email.textContent,
+        text: email.textContent || undefined,
         html: htmlWithTracking,
         headers: prepareEmailHeaders({ messageId: realMessageId })
       }
