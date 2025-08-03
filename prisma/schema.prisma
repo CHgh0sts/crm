@@ -1,0 +1,736 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  firstName     String?
+  lastName      String?
+  avatar        String?
+  company       String?
+  phone         String?
+  address       String?
+  city          String?
+  postalCode    String?
+  country       String?
+  timezone      String   @default("Europe/Paris")
+  currency      String   @default("EUR") // EUR, USD, GBP, CHF, etc.
+  theme         String   @default("light") // light, dark, system
+  language      String   @default("fr") // fr, en, es, de, etc.
+  emailVerified Boolean  @default(false)
+  isActive      Boolean  @default(true)
+  role          Role     @default(USER)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  sessions        Session[]
+  projects        Project[]
+  ownedTasks      Task[]            @relation("TaskOwner")
+  assignedTasks   Task[]            @relation("TaskAssignee")
+  clients         Client[]
+  invoices        Invoice[]
+  quotes          Quote[]
+  timeLogs        TimeLog[]
+  notes           Note[]
+  notifications   Notification[]
+  categories      Category[]
+  tags            Tag[]
+  tasks           Task[]
+  emails          Email[]
+  InvoiceTemplate InvoiceTemplate[]
+  automations     Automation[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  status      ProjectStatus @default(PLANNING)
+  priority    Priority      @default(MEDIUM)
+  color       String        @default("#3B82F6")
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Float?
+  progress    Int           @default(0) // 0-100
+  isArchived  Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  userId     String
+  clientId   String?
+  categoryId String?
+
+  // Relations
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client      Client?      @relation(fields: [clientId], references: [id])
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  tasks       Task[]
+  timeLogs    TimeLog[]
+  notes       Note[]
+  invoices    Invoice[]
+  quotes      Quote[]
+  projectTags ProjectTag[]
+  emails      Email[]
+
+  @@map("projects")
+}
+
+model Task {
+  id             String     @id @default(cuid())
+  title          String
+  description    String?
+  status         TaskStatus @default(TODO)
+  priority       Priority   @default(MEDIUM)
+  dueDate        DateTime?
+  completedAt    DateTime?
+  estimatedHours Float?
+  position       Int        @default(0) // for kanban ordering
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  userId     String
+  projectId  String?
+  assigneeId String?
+
+  // Relations
+  owner    User      @relation("TaskOwner", fields: [userId], references: [id], onDelete: Cascade)
+  project  Project?  @relation(fields: [projectId], references: [id])
+  assignee User?     @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  timeLogs TimeLog[]
+  taskTags TaskTag[]
+  User     User      @relation(fields: [userId], references: [id])
+  Note     Note[]
+  emails   Email[]
+
+  @@map("tasks")
+}
+
+model Client {
+  id         String       @id @default(cuid())
+  name       String
+  company    String?
+  email      String?
+  phone      String?
+  address    String?
+  city       String?
+  postalCode String?
+  country    String?
+  website    String?
+  notes      String?
+  status     ClientStatus @default(ACTIVE)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  userId String
+
+  // Relations
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contacts     Contact[]
+  interactions Interaction[]
+  projects     Project[]
+  invoices     Invoice[]
+  quotes       Quote[]
+  Note         Note[]
+  emails       Email[]
+
+  @@map("clients")
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String?
+  email     String?
+  phone     String?
+  position  String?
+  notes     String?
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clientId String
+
+  // Relations
+  client       Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  interactions Interaction[]
+
+  @@map("contacts")
+}
+
+model Interaction {
+  id          String          @id @default(cuid())
+  type        InteractionType
+  subject     String
+  description String?
+  date        DateTime        @default(now())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  clientId  String
+  contactId String?
+
+  // Relations
+  client  Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  contact Contact? @relation(fields: [contactId], references: [id])
+
+  @@map("interactions")
+}
+
+model Invoice {
+  id          String        @id @default(cuid())
+  number      String        @unique
+  title       String
+  description String?
+  status      InvoiceStatus @default(DRAFT)
+  issueDate   DateTime      @default(now())
+  dueDate     DateTime
+  paidDate    DateTime?
+  subtotal    Float         @default(0)
+  taxRate     Float         @default(20) // TVA en pourcentage
+  taxAmount   Float         @default(0)
+  total       Float         @default(0)
+  currency    String        @default("EUR")
+  notes       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  userId     String
+  clientId   String
+  projectId  String?
+  templateId String?
+
+  // Relations
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client   Client           @relation(fields: [clientId], references: [id])
+  project  Project?         @relation(fields: [projectId], references: [id])
+  template InvoiceTemplate? @relation(fields: [templateId], references: [id])
+  items    InvoiceItem[]
+  emails   Email[]
+
+  @@map("invoices")
+}
+
+model InvoiceTemplate {
+  id          String              @id @default(cuid())
+  name        String
+  description String?
+  isDefault   Boolean             @default(false)
+  isPublic    Boolean             @default(false) // Templates publics (fournis par défaut)
+  category    InvoiceTemplateType @default(BUSINESS)
+
+  // Structure du template en JSON
+  layout   Json // Configuration du layout (colonnes, spacing, etc.)
+  elements Json // Éléments du template (header, body, footer avec leurs positions et styles)
+  styles   Json // Styles globaux (couleurs, polices, tailles)
+
+  // Variables disponibles dans le template
+  variables Json // Définition des variables dynamiques disponibles
+
+  // Métadonnées
+  thumbnail String? // URL de l'aperçu du template
+  version   String  @default("1.0.0")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String? // Null pour les templates par défaut
+
+  // Relations
+  user     User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  invoices Invoice[]
+
+  @@map("invoice_templates")
+}
+
+model InvoiceItem {
+  id          String   @id @default(cuid())
+  description String
+  quantity    Float    @default(1)
+  unitPrice   Float
+  total       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  invoiceId String
+
+  // Relations
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@map("invoice_items")
+}
+
+model Quote {
+  id          String      @id @default(cuid())
+  number      String      @unique
+  title       String
+  description String?
+  status      QuoteStatus @default(DRAFT)
+  validUntil  DateTime
+  subtotal    Float       @default(0)
+  taxRate     Float       @default(20)
+  taxAmount   Float       @default(0)
+  total       Float       @default(0)
+  currency    String      @default("EUR")
+  notes       String?
+  acceptedAt  DateTime?
+  rejectedAt  DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  userId    String
+  clientId  String
+  projectId String?
+
+  // Relations
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client  Client      @relation(fields: [clientId], references: [id])
+  project Project?    @relation(fields: [projectId], references: [id])
+  items   QuoteItem[]
+  emails  Email[]
+
+  @@map("quotes")
+}
+
+model QuoteItem {
+  id          String   @id @default(cuid())
+  description String
+  quantity    Float    @default(1)
+  unitPrice   Float
+  total       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  quoteId String
+
+  // Relations
+  quote Quote @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+
+  @@map("quote_items")
+}
+
+model TimeLog {
+  id          String    @id @default(cuid())
+  description String?
+  startTime   DateTime
+  endTime     DateTime?
+  duration    Int? // en minutes
+  hourlyRate  Float?
+  amount      Float?
+  isBillable  Boolean   @default(true)
+  isRunning   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  userId    String
+  projectId String?
+  taskId    String?
+
+  // Relations
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project? @relation(fields: [projectId], references: [id])
+  task    Task?    @relation(fields: [taskId], references: [id])
+
+  @@map("time_logs")
+}
+
+model Note {
+  id         String   @id @default(cuid())
+  title      String
+  content    String
+  type       NoteType @default(GENERAL)
+  isMarkdown Boolean  @default(false)
+  isPinned   Boolean  @default(false)
+  isArchived Boolean  @default(false)
+  color      String   @default("#FFFFFF")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  userId    String
+  projectId String?
+  clientId  String?
+  taskId    String?
+
+  // Relations
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project? @relation(fields: [projectId], references: [id])
+  client  Client?  @relation(fields: [clientId], references: [id])
+  task    Task?    @relation(fields: [taskId], references: [id])
+  emails  Email[]
+
+  @@map("notes")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  title     String
+  message   String
+  type      NotificationType @default(INFO)
+  isRead    Boolean          @default(false)
+  data      Json? // pour stocker des données supplémentaires
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  userId String
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  color       String   @default("#6B7280")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId String
+
+  // Relations
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projects Project[]
+
+  @@map("categories")
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String
+  color     String   @default("#8B5CF6")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+
+  // Relations
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectTags ProjectTag[]
+  taskTags    TaskTag[]
+
+  @@map("tags")
+}
+
+model ProjectTag {
+  projectId String
+  tagId     String
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tag     Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, tagId])
+  @@map("project_tags")
+}
+
+model TaskTag {
+  taskId String
+  tagId  String
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, tagId])
+  @@map("task_tags")
+}
+
+model Email {
+  id           String      @id @default(cuid())
+  messageId    String      @unique // Message-ID header pour lier les réponses
+  subject      String
+  htmlContent  String
+  textContent  String?
+  fromEmail    String
+  fromName     String?
+  toEmail      String
+  toName       String?
+  ccEmails     String? // JSON array des emails en copie
+  bccEmails    String? // JSON array des emails en copie cachée
+  replyToEmail String?
+  status       EmailStatus @default(DRAFT)
+
+  // Tracking d'ouverture
+  openedAt        DateTime?
+  openedIpAddress String?
+  openedUserAgent String?
+  openCount       Int       @default(0)
+
+  // Tracking de réponse
+  respondedAt    DateTime?
+  responseCount  Int       @default(0)
+  lastResponseAt DateTime?
+
+  // Métadonnées
+  sentAt       DateTime?
+  scheduledAt  DateTime?
+  bounced      Boolean   @default(false)
+  bouncedAt    DateTime?
+  bounceReason String?
+
+  // Headers pour le threading
+  inReplyTo  String? // In-Reply-To header
+  references String? // References header
+  threadId   String? // Custom thread identifier
+
+  // Relations
+  userId    String
+  clientId  String?
+  projectId String?
+  invoiceId String?
+  quoteId   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client  Client?  @relation(fields: [clientId], references: [id])
+  project Project? @relation(fields: [projectId], references: [id])
+  invoice Invoice? @relation(fields: [invoiceId], references: [id])
+  quote   Quote?   @relation(fields: [quoteId], references: [id])
+
+  // Self-referencing pour les réponses
+  parentEmail Email?  @relation("EmailReplies", fields: [inReplyTo], references: [messageId])
+  replies     Email[] @relation("EmailReplies")
+  Task        Task?   @relation(fields: [taskId], references: [id])
+  taskId      String?
+  Note        Note?   @relation(fields: [noteId], references: [id])
+  noteId      String?
+
+  @@index([messageId])
+  @@index([userId, sentAt])
+  @@index([clientId, sentAt])
+  @@index([projectId, sentAt])
+  @@index([inReplyTo])
+  @@index([threadId])
+  @@map("emails")
+}
+
+// Enums
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  IN_REVIEW
+  COMPLETED
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum ClientStatus {
+  ACTIVE
+  INACTIVE
+  PROSPECT
+}
+
+enum InteractionType {
+  EMAIL
+  PHONE
+  MEETING
+  NOTE
+  PROPOSAL
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+}
+
+enum NoteType {
+  GENERAL
+  PROJECT
+  CLIENT
+  MEETING
+  IDEA
+  TASK
+}
+
+enum EmailStatus {
+  DRAFT
+  SCHEDULED
+  SENT
+  DELIVERED
+  OPENED
+  REPLIED
+  BOUNCED
+  FAILED
+}
+
+enum InvoiceTemplateType {
+  BUSINESS
+  CREATIVE
+  MINIMAL
+  PROFESSIONAL
+  MODERN
+  CLASSIC
+}
+
+model Automation {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  type        AutomationType
+  isActive    Boolean        @default(true)
+
+  // Configuration de planification
+  scheduleType         ScheduleType
+  scheduleTime         String? // Format "HH:MM"
+  scheduleDayOfMonth   Int? // 1-31 pour mensuel
+  scheduleDayOfWeek    Int? // 0-6 pour hebdomadaire (0=dimanche)
+  scheduleInterval     Int? // Pour intervalles personnalisés
+  customCronExpression String? // Pour planifications complexes
+
+  // Configuration de l'automatisation
+  config     Json // Configuration spécifique selon le type
+  conditions Json? // Conditions de déclenchement
+
+  // Destinataires et paramètres
+  recipients AutomationRecipient[]
+  executions AutomationExecution[]
+
+  // Statistiques
+  totalExecutions      Int       @default(0)
+  successfulExecutions Int       @default(0)
+  lastExecutedAt       DateTime?
+  nextExecutionAt      DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("automations")
+}
+
+model AutomationRecipient {
+  id            String        @id @default(cuid())
+  email         String
+  name          String?
+  recipientType RecipientType @default(CUSTOM)
+
+  automationId String
+  automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("automation_recipients")
+}
+
+model AutomationExecution {
+  id          String          @id @default(cuid())
+  status      ExecutionStatus
+  startedAt   DateTime        @default(now())
+  completedAt DateTime?
+  error       String?
+  result      Json? // Résultat de l'exécution
+
+  automationId String
+  automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+
+  @@map("automation_executions")
+}
+
+enum AutomationType {
+  EMAIL_REMINDER // Rappels par email
+  TASK_CREATION // Création automatique de tâches
+  STATUS_UPDATE // Mise à jour de statuts
+  REPORT_GENERATION // Génération de rapports
+  CLIENT_FOLLOW_UP // Suivi client automatique
+  INVOICE_REMINDER // Rappels de facture
+  BACKUP_DATA // Sauvegarde automatique
+  NOTIFICATION_SEND // Envoi de notifications
+  PROJECT_ARCHIVE // Archivage automatique de projets
+  CLIENT_CHECK_IN // Vérification périodique clients
+  DEADLINE_ALERT // Alertes d'échéances
+  WEEKLY_SUMMARY // Résumé hebdomadaire
+}
+
+enum ScheduleType {
+  ONCE // Une seule fois
+  DAILY // Quotidien
+  WEEKLY // Hebdomadaire
+  MONTHLY // Mensuel
+  YEARLY // Annuel
+  INTERVAL // Intervalles personnalisés
+  CUSTOM_CRON // Expression cron personnalisée
+}
+
+enum RecipientType {
+  CUSTOM // Email personnalisé
+  CLIENT // Tous les clients
+  TEAM // Équipe interne
+  PROJECT_MEMBERS // Membres d'un projet spécifique
+}
+
+enum ExecutionStatus {
+  PENDING // En attente
+  RUNNING // En cours d'exécution
+  SUCCESS // Succès
+  FAILED // Échec
+  CANCELLED // Annulé
+}
