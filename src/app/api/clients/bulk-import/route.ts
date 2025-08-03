@@ -1,0 +1,182 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod'
+import { prisma } from '@/lib/db'
+import { getCurrentUser } from '@/lib/auth'
+
+// Schéma de validation pour un restaurant
+const restaurantSchema = z.object({
+  nom: z.string().min(1, 'Le nom est requis'),
+  adresse: z.string().optional(),
+  telephone: z.string().optional(),
+  email: z.string().email('Email invalide').optional().or(z.literal('')),
+  site_web: z.string().url('URL invalide').optional().or(z.literal('')),
+  type_cuisine: z.string().optional(),
+  note_moyenne: z.number().optional(),
+  nombre_avis: z.number().optional(),
+  gamme_prix: z.string().optional(),
+  horaires: z.record(z.string(), z.string()).optional(),
+  services: z.array(z.string()).optional(),
+  specialites: z.array(z.string()).optional(),
+  photos: z.array(z.string()).optional(),
+})
+
+// Schéma pour la requête complète
+const bulkImportSchema = z.object({
+  restaurants: z.array(restaurantSchema),
+  createAsProspects: z.boolean().default(true),
+})
+
+// Interface pour le résultat de l'import
+interface ImportResult {
+  created: number
+  skipped: number
+  errors: number
+  details: Array<{
+    name: string
+    status: 'created' | 'skipped' | 'error'
+    reason?: string
+    clientId?: string
+  }>
+}
+
+// POST /api/clients/bulk-import - Importer des restaurants en lot comme prospects
+export async function POST(request: NextRequest) {
+  try {
+    const user = await getCurrentUser()
+    if (!user) {
+      return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
+    }
+
+    const body = await request.json()
+    const validatedData = bulkImportSchema.parse(body)
+
+    console.log(`🚀 Début d'import en lot de ${validatedData.restaurants.length} restaurants`)
+
+    const result: ImportResult = {
+      created: 0,
+      skipped: 0,
+      errors: 0,
+      details: []
+    }
+
+    for (const restaurant of validatedData.restaurants) {
+      try {
+        // Vérifier si un client existe déjà avec le même email ou nom+adresse
+        let existingClient = null
+        
+        if (restaurant.email) {
+          existingClient = await prisma.client.findFirst({
+            where: {
+              userId: user.id,
+              email: restaurant.email
+            }
+          })
+        }
+
+        // Si pas trouvé par email, chercher par nom et adresse
+        if (!existingClient && restaurant.adresse) {
+          existingClient = await prisma.client.findFirst({
+            where: {
+              userId: user.id,
+              name: restaurant.nom,
+              address: restaurant.adresse
+            }
+          })
+        }
+
+        if (existingClient) {
+          result.skipped++
+          result.details.push({
+            name: restaurant.nom,
+            status: 'skipped',
+            reason: `Client existant${restaurant.email ? ' (même email)' : ' (même nom et adresse)'}`
+          })
+          continue
+        }
+
+        // Préparer les données pour la création du client
+        const clientData = {
+          name: restaurant.nom,
+          company: restaurant.nom, // Utiliser le nom comme nom d'entreprise
+          email: restaurant.email || null,
+          phone: restaurant.telephone || null,
+          address: restaurant.adresse || null,
+          website: restaurant.site_web || null,
+          status: validatedData.createAsProspects ? 'PROSPECT' as const : 'ACTIVE' as const,
+          notes: [
+            restaurant.type_cuisine ? `Type de cuisine: ${restaurant.type_cuisine}` : '',
+            restaurant.note_moyenne ? `Note moyenne: ${restaurant.note_moyenne}` : '',
+            restaurant.nombre_avis ? `Nombre d'avis: ${restaurant.nombre_avis}` : '',
+            restaurant.gamme_prix ? `Gamme de prix: ${restaurant.gamme_prix}` : '',
+            restaurant.specialites?.length ? `Spécialités: ${restaurant.specialites.join(', ')}` : '',
+            restaurant.services?.length ? `Services: ${restaurant.services.join(', ')}` : '',
+          ].filter(Boolean).join('\n'),
+          userId: user.id,
+        }
+
+        // Créer le client
+        const newClient = await prisma.client.create({
+          data: clientData,
+          include: {
+            _count: {
+              select: {
+                contacts: true,
+                interactions: true,
+                projects: true,
+                invoices: true,
+                quotes: true,
+              },
+            },
+          },
+        })
+
+        result.created++
+        result.details.push({
+          name: restaurant.nom,
+          status: 'created',
+          clientId: newClient.id
+        })
+
+        console.log(`✅ Client créé: ${restaurant.nom} (ID: ${newClient.id})`)
+
+      } catch (error) {
+        console.error(`❌ Erreur lors de la création du client ${restaurant.nom}:`, error)
+        result.errors++
+        result.details.push({
+          name: restaurant.nom,
+          status: 'error',
+          reason: error instanceof Error ? error.message : 'Erreur inconnue'
+        })
+      }
+    }
+
+    console.log(`🎉 Import terminé: ${result.created} créés, ${result.skipped} ignorés, ${result.errors} erreurs`)
+
+    return NextResponse.json({
+      success: true,
+      message: `Import terminé: ${result.created} clients créés, ${result.skipped} ignorés, ${result.errors} erreurs`,
+      result
+    }, { status: 201 })
+
+  } catch (error) {
+    console.error('Erreur lors de l\'import en lot:', error)
+
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { 
+          error: 'Données invalides', 
+          details: error.issues.map(issue => ({
+            path: issue.path.join('.'),
+            message: issue.message
+          }))
+        },
+        { status: 400 }
+      )
+    }
+
+    return NextResponse.json(
+      { error: 'Erreur interne du serveur' },
+      { status: 500 }
+    )
+  }
+}
