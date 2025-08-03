@@ -28,7 +28,7 @@ export function convertOklchToRgb(oklchValue: string): string {
 }
 
 // Fonction pour nettoyer les styles CSS problématiques pour la génération PDF
-export function sanitizeElementForPdf(element: HTMLElement): void {
+export function sanitizeElementForPdf(element: HTMLElement): HTMLElement {
   // Nettoyer récursivement tous les éléments enfants
   const allElements = element.querySelectorAll('*')
   
@@ -64,4 +64,6 @@ export function sanitizeElementForPdf(element: HTMLElement): void {
       htmlEl.style.filter = 'none'
     }
   })
+  
+  return element
 }
