@@ -119,10 +119,12 @@ export async function PUT(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que la facture appartient à l'utilisateur
     const existingInvoice = await prisma.invoice.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
       include: {
@@ -207,7 +209,7 @@ export async function PUT(
 
       // Supprimer les anciens articles et créer les nouveaux
       await prisma.invoiceItem.deleteMany({
-        where: { invoiceId: params.id },
+        where: { invoiceId: id },
       })
 
       updateData.items = {
@@ -221,7 +223,7 @@ export async function PUT(
     }
 
     const updatedInvoice = await prisma.invoice.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         ...updateData,
         updatedAt: new Date(),
@@ -279,10 +281,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
     }
 
+    const { id } = await params
+
     // Vérifier que la facture appartient à l'utilisateur
     const existingInvoice = await prisma.invoice.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
     })
@@ -304,7 +308,7 @@ export async function DELETE(
 
     // Supprimer la facture (les articles seront supprimés en cascade)
     await prisma.invoice.delete({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     return NextResponse.json({ 
