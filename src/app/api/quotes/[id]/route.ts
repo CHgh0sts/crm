@@ -38,9 +38,11 @@ export async function GET(
       )
     }
 
+    const { id } = await params
+
     const quote = await prisma.quote.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: user.id,
       },
       include: {
@@ -130,13 +132,15 @@ export async function PUT(
       )
     }
 
+    const { id } = await params
+
     const body = await request.json()
     const validatedData = updateQuoteSchema.parse(body)
 
     // Vérifier que le devis existe et appartient à l'utilisateur
     const existingQuote = await prisma.quote.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId,
       },
       include: {
@@ -190,7 +194,7 @@ export async function PUT(
     if (validatedData.items) {
       // Supprimer tous les éléments existants et les recréer
       await prisma.quoteItem.deleteMany({
-        where: { quoteId: params.id },
+        where: { quoteId: id },
       })
 
       // Recalculer les montants
@@ -285,10 +289,12 @@ export async function DELETE(
       )
     }
 
+    const { id } = await params
+
     // Vérifier que le devis existe et appartient à l'utilisateur
     const existingQuote = await prisma.quote.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId,
       },
       include: {
@@ -323,7 +329,7 @@ export async function DELETE(
 
     // Supprimer le devis (les éléments seront supprimés automatiquement via CASCADE)
     await prisma.quote.delete({
-      where: { id: params.id },
+      where: { id: id },
     })
 
     return NextResponse.json({ success: true })
