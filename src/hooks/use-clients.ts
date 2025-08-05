@@ -112,7 +112,7 @@ export function useClients() {
   const fetchClients = async (params?: {
     status?: string
     page?: number
-    limit?: number
+    limit?: number | 'all'
   }) => {
     try {
       setLoading(true)
@@ -122,6 +122,7 @@ export function useClients() {
       if (params?.status) searchParams.set('status', params.status)
       if (params?.page) searchParams.set('page', params.page.toString())
       if (params?.limit) searchParams.set('limit', params.limit.toString())
+      else searchParams.set('limit', 'all') // Par défaut, charger tous les clients
 
       const response = await fetch(`/api/clients?${searchParams}`)
       
@@ -216,7 +217,7 @@ export function useClients() {
   }
 
   useEffect(() => {
-    fetchClients()
+    fetchClients() // Par défaut, charge tous les clients
   }, [])
 
   return {

@@ -1,0 +1,1047 @@
+{
+  "timestamp": "2025-08-05T09:42:29.446Z",
+  "totalClients": 114,
+  "clients": [
+    {
+      "clientId": "cmdw4cyjz0002nx0km4a5lbjj",
+      "clientName": "Le BoVincennes - Steakhouse restaurant Vincennes",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.231Z"
+    },
+    {
+      "clientId": "cmdw4cykn0004nx0kbuxw64pr",
+      "clientName": "La Table des Troys",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.255Z"
+    },
+    {
+      "clientId": "cmdw4cykw0006nx0kbcxqwgce",
+      "clientName": "Restaurant Numidia",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.264Z"
+    },
+    {
+      "clientId": "cmdw4cyl30008nx0k3vsxykxd",
+      "clientName": "LA SORBONNE",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.272Z"
+    },
+    {
+      "clientId": "cmdw4cyla000anx0km8jxs8h8",
+      "clientName": "Fantastyk - Street food Paris 12",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.278Z"
+    },
+    {
+      "clientId": "cmdw4cyli000cnx0k6ryiu7ar",
+      "clientName": "BSR RESTAURANT GROUPE CLUB ANNIVERSAIRE",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.287Z"
+    },
+    {
+      "clientId": "cmdw4cyls000enx0k1os6bc1n",
+      "clientName": "LE COELY RESTAURANT",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.296Z"
+    },
+    {
+      "clientId": "cmdw4cylz000gnx0ko23y3mf2",
+      "clientName": "Le 217 Brasserie Restaurant",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.303Z"
+    },
+    {
+      "clientId": "cmdw4cym5000inx0kzgccl029",
+      "clientName": "Brasserie Chacha",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.309Z"
+    },
+    {
+      "clientId": "cmdw4cymb000knx0kc72cld2f",
+      "clientName": "Chez Addy & Ida",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.315Z"
+    },
+    {
+      "clientId": "cmdw4cymi000mnx0k58he7yn2",
+      "clientName": "Les Zygomates.",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.322Z"
+    },
+    {
+      "clientId": "cmdw4cymq000onx0kf2xgxu3s",
+      "clientName": "La Cantine de daumesnil - restaurant paris 12",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.330Z"
+    },
+    {
+      "clientId": "cmdw4cyn1000qnx0kor2t8f5p",
+      "clientName": "Le Picotin",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.342Z"
+    },
+    {
+      "clientId": "cmdw4cync000snx0k5nqq5h7s",
+      "clientName": "Legacy",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.352Z"
+    },
+    {
+      "clientId": "cmdw4cynp000unx0kz1guku90",
+      "clientName": "Wupisi",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.365Z"
+    },
+    {
+      "clientId": "cmdw4cynw000wnx0ku8fzd080",
+      "clientName": "L'églantine",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.372Z"
+    },
+    {
+      "clientId": "cmdw4cyo2000ynx0kj9aqiseg",
+      "clientName": "DAME NATION le restaurant",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-03T20:13:41.378Z"
+    },
+    {
+      "clientId": "cmdw4cyo80010nx0ktzw8iz5k",
+      "clientName": "Les Voisins",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.384Z"
+    },
+    {
+      "clientId": "cmdw4cyoe0012nx0kmyewkfjq",
+      "clientName": "Restaurant Antalya",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.391Z"
+    },
+    {
+      "clientId": "cmdw4cyol0014nx0kk3fa8iqk",
+      "clientName": "Les Mondes Bohèmes - Restaurant Paris 20",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.397Z"
+    },
+    {
+      "clientId": "cmdw4cyos0016nx0kacn87v8v",
+      "clientName": "Amalfi",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.405Z"
+    },
+    {
+      "clientId": "cmdw4cyp10018nx0kyhl8a66v",
+      "clientName": "Restaurant Le Prince",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.414Z"
+    },
+    {
+      "clientId": "cmdw4cypb001anx0kird3srpe",
+      "clientName": "Chouchou",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.423Z"
+    },
+    {
+      "clientId": "cmdw4cyq2001cnx0kes9p6bwn",
+      "clientName": "Il Grano",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.450Z"
+    },
+    {
+      "clientId": "cmdw4cyqh001enx0k8e34eh1v",
+      "clientName": "Le Marais Restaurant Paris",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.465Z"
+    },
+    {
+      "clientId": "cmdw4cyqw001gnx0keh38rdx8",
+      "clientName": "Sphère",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.480Z"
+    },
+    {
+      "clientId": "cmdw4cyrg001inx0kozlvihcp",
+      "clientName": "Le Poulbot",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.500Z"
+    },
+    {
+      "clientId": "cmdw4cyrq001knx0kwf2habw2",
+      "clientName": "Restaurant Cléo",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.511Z"
+    },
+    {
+      "clientId": "cmdw4cys0001mnx0khskkk0d9",
+      "clientName": "Bistro L'Olivier",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.521Z"
+    },
+    {
+      "clientId": "cmdw4cys9001onx0kshu490hs",
+      "clientName": "ASPIC",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.530Z"
+    },
+    {
+      "clientId": "cmdw4cyso001qnx0k7ij37ved",
+      "clientName": "Creme Restaurant",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.544Z"
+    },
+    {
+      "clientId": "cmdw4cysw001snx0kb6f797g6",
+      "clientName": "Le Comptoir Boutary",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.553Z"
+    },
+    {
+      "clientId": "cmdw4cyt7001unx0kzya0f29n",
+      "clientName": "Le Paris 17",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.563Z"
+    },
+    {
+      "clientId": "cmdw4cyti001wnx0kw9p2if76",
+      "clientName": "RESTAURANT ERH",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.574Z"
+    },
+    {
+      "clientId": "cmdw4cytv001ynx0krugegkrd",
+      "clientName": "The Place to...Wagram - Restaurant Pub Paris 17",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.587Z"
+    },
+    {
+      "clientId": "cmdw4cyu40020nx0kv0czodzb",
+      "clientName": "Le Florentin",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.597Z"
+    },
+    {
+      "clientId": "cmdw4cyuc0022nx0kylmy0qrk",
+      "clientName": "Origines",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.605Z"
+    },
+    {
+      "clientId": "cmdw4cyui0024nx0krhjpqm6m",
+      "clientName": "Restaurant Eels",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.611Z"
+    },
+    {
+      "clientId": "cmdw4cyus0026nx0kuyjizlwm",
+      "clientName": "Restaurant Le 3V",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.620Z"
+    },
+    {
+      "clientId": "cmdw4cyuy0028nx0ksqk37pce",
+      "clientName": "Mian Fan",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.627Z"
+    },
+    {
+      "clientId": "cmdw4cyv5002anx0kcw9ubpos",
+      "clientName": "Petit Boutary",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.634Z"
+    },
+    {
+      "clientId": "cmdw4cyvb002cnx0k7u9l5p85",
+      "clientName": "The Kitchen",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.640Z"
+    },
+    {
+      "clientId": "cmdw4cyvh002enx0k09zc7gs5",
+      "clientName": "Hôtel Restaurant Sofiane",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.645Z"
+    },
+    {
+      "clientId": "cmdw4cyvm002gnx0kjkb7l2n5",
+      "clientName": "Saigon Hanoi - Restaurant Vietnamien Paris 11",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.651Z"
+    },
+    {
+      "clientId": "cmdw4cyvt002inx0ka86ixsky",
+      "clientName": "Saveurs de Printemps",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.657Z"
+    },
+    {
+      "clientId": "cmdw4cyvz002knx0kv6ywx8ad",
+      "clientName": "Chez Long, cuisine vietnamienne",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.663Z"
+    },
+    {
+      "clientId": "cmdw4cyw5002mnx0kbkvuyb5b",
+      "clientName": "Jungle Wok - Restaurant Thaïlandais Paris 12",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.670Z"
+    },
+    {
+      "clientId": "cmdw4cywn002onx0kyumyrcah",
+      "clientName": "Le Marrakech",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.687Z"
+    },
+    {
+      "clientId": "cmdw4cyx0002qnx0knv91t2zy",
+      "clientName": "PANKO Vincennes - Restaurant de street food japonaise",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.701Z"
+    },
+    {
+      "clientId": "cmdw4cyx8002snx0kfe9tbpcv",
+      "clientName": "890 Restaurant",
+      "clientEmail": null,
+      "userId": "cmdw4cyiw0000nx0ktoh0vsxy",
+      "userEmail": "system@import.local",
+      "userName": "Système Import",
+      "createdAt": "2025-08-03T20:13:41.708Z"
+    },
+    {
+      "clientId": "cmdxk733p0001mr0l4qryi3ro",
+      "clientName": "Les Voisins",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.220Z"
+    },
+    {
+      "clientId": "cmdxk734f0003mr0li8ry5dwr",
+      "clientName": "Restaurant Antalya",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.247Z"
+    },
+    {
+      "clientId": "cmdxk734m0005mr0lbdiwbyjz",
+      "clientName": "Les Mondes Bohèmes - Restaurant Paris 20",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.254Z"
+    },
+    {
+      "clientId": "cmdxk734t0007mr0ldsnqe512",
+      "clientName": "Amalfi",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.261Z"
+    },
+    {
+      "clientId": "cmdxk73500009mr0lcqakysos",
+      "clientName": "Restaurant Le Prince",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.268Z"
+    },
+    {
+      "clientId": "cmdxk7356000bmr0l75y7jaij",
+      "clientName": "Chouchou",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.274Z"
+    },
+    {
+      "clientId": "cmdxk735d000dmr0ls1j383tn",
+      "clientName": "Il Grano",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.281Z"
+    },
+    {
+      "clientId": "cmdxk735i000fmr0lv6st5wj0",
+      "clientName": "Le Marais Restaurant Paris",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.286Z"
+    },
+    {
+      "clientId": "cmdxk735n000hmr0luf7lc0bd",
+      "clientName": "Sphère",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.291Z"
+    },
+    {
+      "clientId": "cmdxk735v000jmr0ltnb54cne",
+      "clientName": "Le Poulbot",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.299Z"
+    },
+    {
+      "clientId": "cmdxk7360000lmr0lpc1z6zg5",
+      "clientName": "Restaurant Cléo",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.304Z"
+    },
+    {
+      "clientId": "cmdxk7365000nmr0l7zloth98",
+      "clientName": "Bistro L'Olivier",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.310Z"
+    },
+    {
+      "clientId": "cmdxk736b000pmr0lq80vu90p",
+      "clientName": "ASPIC",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.315Z"
+    },
+    {
+      "clientId": "cmdxk736i000rmr0leoa1qc1l",
+      "clientName": "Creme Restaurant",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.323Z"
+    },
+    {
+      "clientId": "cmdxk736o000tmr0lh4wif82v",
+      "clientName": "Le Comptoir Boutary",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.328Z"
+    },
+    {
+      "clientId": "cmdxk736v000vmr0lyp3ei0ez",
+      "clientName": "Le Paris 17",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.336Z"
+    },
+    {
+      "clientId": "cmdxk7371000xmr0llsmu1gwx",
+      "clientName": "RESTAURANT ERH",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.342Z"
+    },
+    {
+      "clientId": "cmdxk7377000zmr0lae8nfkj8",
+      "clientName": "The Place to...Wagram - Restaurant Pub Paris 17",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.348Z"
+    },
+    {
+      "clientId": "cmdxk737c0011mr0luh2if43n",
+      "clientName": "Le Florentin",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.352Z"
+    },
+    {
+      "clientId": "cmdxk737h0013mr0lqv5cfz6f",
+      "clientName": "Origines",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.357Z"
+    },
+    {
+      "clientId": "cmdxk737l0015mr0lpcym3rfi",
+      "clientName": "Restaurant Eels",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.362Z"
+    },
+    {
+      "clientId": "cmdxk737s0017mr0labd9o17f",
+      "clientName": "Restaurant Le 3V",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.368Z"
+    },
+    {
+      "clientId": "cmdxk737w0019mr0ljav0roja",
+      "clientName": "Mian Fan",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.373Z"
+    },
+    {
+      "clientId": "cmdxk7381001bmr0lzeh54m8x",
+      "clientName": "Petit Boutary",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.378Z"
+    },
+    {
+      "clientId": "cmdxk7389001dmr0lnylaz8n2",
+      "clientName": "The Kitchen",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.386Z"
+    },
+    {
+      "clientId": "cmdxk738g001fmr0l7otloefz",
+      "clientName": "Hôtel Restaurant Sofiane",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.393Z"
+    },
+    {
+      "clientId": "cmdxk738m001hmr0lmsujsi83",
+      "clientName": "Saigon Hanoi - Restaurant Vietnamien Paris 11",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.399Z"
+    },
+    {
+      "clientId": "cmdxk738r001jmr0l2j29uapm",
+      "clientName": "Saveurs de Printemps",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.404Z"
+    },
+    {
+      "clientId": "cmdxk738x001lmr0lk5u8koc8",
+      "clientName": "Chez Long, cuisine vietnamienne",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.409Z"
+    },
+    {
+      "clientId": "cmdxk7392001nmr0lumuqeez4",
+      "clientName": "Jungle Wok - Restaurant Thaïlandais Paris 12",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.415Z"
+    },
+    {
+      "clientId": "cmdxk7397001pmr0lktt6x8uo",
+      "clientName": "Le Marrakech",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.419Z"
+    },
+    {
+      "clientId": "cmdxk739c001rmr0lg0wk9oa9",
+      "clientName": "PANKO Vincennes - Restaurant de street food japonaise",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.424Z"
+    },
+    {
+      "clientId": "cmdxk739g001tmr0ldncbdiuu",
+      "clientName": "890 Restaurant",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T20:24:47.429Z"
+    },
+    {
+      "clientId": "cmdxm6uza001xmr0loi0wpnr7",
+      "clientName": "Cavale",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:35.927Z"
+    },
+    {
+      "clientId": "cmdxm6v0j001zmr0lqmoa1x40",
+      "clientName": "Les Saisons",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:35.972Z"
+    },
+    {
+      "clientId": "cmdxm6v130021mr0lyqod7839",
+      "clientName": "Brasserie L'Alsace",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:35.991Z"
+    },
+    {
+      "clientId": "cmdxm6v2a0023mr0lsoikaeno",
+      "clientName": "La Bastide",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.034Z"
+    },
+    {
+      "clientId": "cmdxm6v2o0025mr0lf7h70m9o",
+      "clientName": "Signature Montmartre",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.048Z"
+    },
+    {
+      "clientId": "cmdxm6v3b0027mr0l6d6a2zb3",
+      "clientName": "Le Normandie",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.072Z"
+    },
+    {
+      "clientId": "cmdxm6v3n0029mr0ljerggiew",
+      "clientName": "La Vache et le Cuisinier",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.083Z"
+    },
+    {
+      "clientId": "cmdxm6v48002bmr0li7c83mao",
+      "clientName": "Rooster par Frédéric Duca",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.104Z"
+    },
+    {
+      "clientId": "cmdxm6v4t002dmr0lzkwkzyyo",
+      "clientName": "Chantoiseau",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.125Z"
+    },
+    {
+      "clientId": "cmdxm6v51002fmr0l1e4p3uq7",
+      "clientName": "Le Robinet d'Or Restaurant & Bar Canal Saint Martin",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.134Z"
+    },
+    {
+      "clientId": "cmdxm6v5l002hmr0lbb8i8iv9",
+      "clientName": "Les Poulettes Batignolles",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.153Z"
+    },
+    {
+      "clientId": "cmdxm6v5z002jmr0ly4k91apy",
+      "clientName": "Restaurant Les Carrières",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.167Z"
+    },
+    {
+      "clientId": "cmdxm6v6f002lmr0l84tii5sx",
+      "clientName": "Aux Dés Calés 17",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.183Z"
+    },
+    {
+      "clientId": "cmdxm6v6o002nmr0l8pmspsnx",
+      "clientName": "JJ Beaumarchais",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.193Z"
+    },
+    {
+      "clientId": "cmdxm6v6w002pmr0lcfynpfw7",
+      "clientName": "Lou Cantou",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.200Z"
+    },
+    {
+      "clientId": "cmdxm6v78002rmr0lqfvaqmbb",
+      "clientName": "MIURA",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.213Z"
+    },
+    {
+      "clientId": "cmdxm6v7g002tmr0lcevbc7j0",
+      "clientName": "Chez Toinette",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.220Z"
+    },
+    {
+      "clientId": "cmdxm6v7w002vmr0leijg1siy",
+      "clientName": "Les Parigots République - Restaurant Paris 10 eme",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.237Z"
+    },
+    {
+      "clientId": "cmdxm6v82002xmr0ldhx8d14c",
+      "clientName": "Bontemps Le Restaurant \"Jardin secret\"",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.243Z"
+    },
+    {
+      "clientId": "cmdxm6v88002zmr0l2ooffm4j",
+      "clientName": "Big Black Cook",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.248Z"
+    },
+    {
+      "clientId": "cmdxm6v8j0031mr0lp8vm02k1",
+      "clientName": "Le Sens Unique",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.259Z"
+    },
+    {
+      "clientId": "cmdxm6v8w0033mr0luifviypu",
+      "clientName": "Pur'",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.272Z"
+    },
+    {
+      "clientId": "cmdxm6v920035mr0lo8g9vu6q",
+      "clientName": "Les Nouilles Dansantes",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.279Z"
+    },
+    {
+      "clientId": "cmdxm6v9b0037mr0lpbb24b9t",
+      "clientName": "Chez Elie",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.287Z"
+    },
+    {
+      "clientId": "cmdxm6v9i0039mr0lkbok85xf",
+      "clientName": "Comme Chez Maman",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.294Z"
+    },
+    {
+      "clientId": "cmdxm6v9p003bmr0lz4c13v91",
+      "clientName": "La Padellina",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.302Z"
+    },
+    {
+      "clientId": "cmdxm6v9u003dmr0lta5xpk0m",
+      "clientName": "Restaurant Du Coin",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.307Z"
+    },
+    {
+      "clientId": "cmdxm6v9z003fmr0l23cz2391",
+      "clientName": "Restaurant Mâche",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-04T21:20:36.312Z"
+    },
+    {
+      "clientId": "cmdycg9fz003hmr0lcpr999cw",
+      "clientName": "Les Demoiselles Restaurant Paris 17",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-05T09:35:44.588Z"
+    },
+    {
+      "clientId": "cmdycg9j0003jmr0lj9kzsfaq",
+      "clientName": "Bistrot Chez Soi - Restaurant Brasserie Française",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-05T09:35:44.700Z"
+    },
+    {
+      "clientId": "cmdycg9jf003lmr0l5gs1eagm",
+      "clientName": "Restaurant Chez Lucette",
+      "clientEmail": null,
+      "userId": "cmdw4dt4i002tnx0ktyeby281",
+      "userEmail": "chghosts.dev@gmail.com",
+      "userName": "herve robinet",
+      "createdAt": "2025-08-05T09:35:44.715Z"
+    }
+  ],
+  "statistics": {
+    "userCount": 2,
+    "distribution": {
+      "cmdw4dt4i002tnx0ktyeby281": {
+        "userEmail": "chghosts.dev@gmail.com",
+        "userName": "herve robinet",
+        "count": 81
+      },
+      "cmdw4cyiw0000nx0ktoh0vsxy": {
+        "userEmail": "system@import.local",
+        "userName": "Système Import",
+        "count": 33
+      }
+    }
+  }
+}
