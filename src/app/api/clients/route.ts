@@ -139,7 +139,7 @@ export async function GET(request: NextRequest) {
         page,
         limit,
         totalCount,
-        totalPages: Math.ceil(totalCount / limit),
+        totalPages: limit ? Math.ceil(totalCount / limit) : 1,
       },
     })
   } catch (error) {
